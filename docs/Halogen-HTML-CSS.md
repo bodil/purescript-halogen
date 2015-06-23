@@ -48,7 +48,7 @@ H.div [ Css.style do color red
 #### `stylesheet`
 
 ``` purescript
-stylesheet :: forall i. Css -> H.HTML i
+stylesheet :: forall p i. Css -> H.HTML p i
 ```
 
 Render a set of rules as a `style` element.

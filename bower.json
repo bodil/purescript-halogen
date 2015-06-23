@@ -31,6 +31,7 @@
     "purescript-exists": "~0.1.1",
     "purescript-lists": "~0.6.0",
     "purescript-integers": "~0.1.0",
-    "purescript-css": "~0.1.0"
+    "purescript-css": "~0.1.0",
+    "purescript-free": "~0.4.2"
   }
 }

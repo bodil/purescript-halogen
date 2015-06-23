@@ -3,7 +3,7 @@
 module Halogen.HTML.CSS
   ( Styles(..)
   , runStyles
-  
+
   , style
   , stylesheet
   ) where
@@ -50,16 +50,16 @@ style = A.attr (A.attributeName "style") <<< Styles <<< rules <<< runS
     where
     properties :: [Tuple String String]
     properties = mapMaybe property rs >>= collect >>> rights
-    
+
   property :: Rule -> Maybe (Tuple (Key Unit) Value)
   property (Property k v) = Just (Tuple k v)
   property _              = Nothing
-  
+
   rights :: forall a b. [Either a b] -> [b]
   rights = mapMaybe (either (const Nothing) Just)
 
 -- | Render a set of rules as a `style` element.
-stylesheet :: forall i. Css -> H.HTML i
+stylesheet :: forall p i. Css -> H.HTML p i
 stylesheet css = H.style [ A.type_ "text/css" ] [ H.text content ]
   where
   content = fromMaybe "" $ renderedSheet $ render css

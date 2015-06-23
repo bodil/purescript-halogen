@@ -1,9 +1,9 @@
-module Halogen.HTML.Renderer.VirtualDOM 
+module Halogen.HTML.Renderer.VirtualDOM
   ( renderHTML
   ) where
-      
+
 import Data.Array (map)
-import Data.Function    
+import Data.Function
 import Data.Foldable (for_, foldMap)
 import Data.Monoid
 import Data.Exists
@@ -17,7 +17,7 @@ import qualified Halogen.HTML.Attributes as A
 import Halogen.HTML.Events.Types
 import Halogen.HTML.Events.Handler
 import Halogen.Internal.VirtualDOM
-      
+
 renderAttr :: forall i eff. (i -> Eff eff Unit) -> A.Attr i -> Props
 renderAttr _  (A.Attr e) = runExists (\(A.AttrF _ key value) -> runFn2 prop (A.runAttributeName key) value) e
 renderAttr dr (A.Handler e) = A.runExistsR (\(A.HandlerF name k) ->
@@ -30,7 +30,7 @@ renderAttr dr (A.Finalizer i) = finalizerProp (dr i)
 -- | Render a `HTML` document to a virtual DOM node
 -- |
 -- | The first argument is an event handler.
-renderHTML :: forall i eff. (i -> Eff eff Unit) -> H.HTML i -> VTree
+renderHTML :: forall p i eff. (i -> Eff eff Unit) -> H.HTML p i -> VTree
 renderHTML f = go
   where
   go (H.Text s) = vtext s
